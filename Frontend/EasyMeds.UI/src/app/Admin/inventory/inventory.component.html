@@ -1,0 +1,205 @@
+<!-- <div class="drug-list-page">
+    <h2>Drug List</h2>
+  
+    <button (click)="showAddForm = !showAddForm" class="toggle-form-btn">
+      {{ showAddForm ? 'Cancel' : 'Add Drug' }}
+    </button>
+  
+    <div *ngIf="showAddForm" class="form-box">
+      <h3>{{ editMode ? 'Edit Drug' : 'Add New Drug' }}</h3>
+      <form (ngSubmit)="editMode ? updateDrug() : addDrug()" #drugForm="ngForm">
+        <div class="form-row">
+          <input type="text" name="name" [(ngModel)]="newDrug.name" placeholder="Name" />
+        </div>
+
+        <div class="form-row">
+          <textarea name="description" [(ngModel)]="newDrug.description" placeholder="Description"></textarea>
+        </div>
+        <div class="form-row">
+          <input type="number" name="price" [(ngModel)]="newDrug.price" placeholder="Price (₹)" />
+
+        </div>
+        <div class="form-row">
+            <input type="number" name="stock" [(ngModel)]="newDrug.stock" placeholder="Stock"/>
+          </div>
+          <div class="form-row">
+            <input type="date" name="drugexpiry" [(ngModel)]="newDrug.drugExpiry" placeholder="Drug Expiry"/>
+          </div>
+          <div class="form-row" >
+            <select name="category" [(ngModel)]="newDrug.categoryId" placeholder="Select Category" required>
+              <option value="" disabled selected>Select Category</option>
+              <option *ngFor="let category of categories" [value]="category.categoryId">
+                {{ category.categoryName }}
+              </option>
+            </select>
+          </div>
+        <button type="submit" [disabled]="drugForm.invalid" class="submit-btn">
+          {{ editMode ? 'Update' : 'Submit' }}
+        </button>
+      </form>
+    </div>
+  
+    <div *ngIf="drugs.length === 0" class="no-drugs">No drugs found.</div>
+  
+    <div class="table-wrapper" *ngIf="drugs.length > 0">
+      <table class="drug-table table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price (₹)</th>
+            <th>Stock</th>
+            <th>Drug Expiry</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let drug of drugs">
+            <td>{{ drug.name }}</td>
+            <td>{{ drug.description }}</td>
+            <td>{{ drug.price | number: '1.2-2' }}</td>
+            <td>{{ drug.stock }}</td>
+            <td>{{ drug.drugExpiry | date}}</td>
+            <td>{{ getCategoryName(drug.categoryId) }}</td>
+            <div class="buttons">
+              <td>
+                <button (click)="editDrug(drug)">Edit</button>
+                <button (click)="deleteDrug(drug.drugId)">Delete</button>
+              </td>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+   -->
+
+   <div class="drug-list-page">
+    <div class="page-header">
+      <h2>Drug Inventory</h2>
+      <button (click)="showAddForm = !showAddForm" class="toggle-form-btn">
+        <i class="material-icons">{{ showAddForm ? 'close' : 'add' }}</i>
+        {{ showAddForm ? 'Cancel' : 'Add New Drug' }}
+      </button>
+    </div>
+  
+    <!-- Add/Edit Form -->
+    <div *ngIf="showAddForm" class="form-box">
+      <h3>{{ editMode ? 'Edit Drug' : 'Add New Drug' }}</h3>
+      <form (ngSubmit)="editMode ? updateDrug() : addDrug()" #drugForm="ngForm">
+        <div class="form-row">
+          <div class="input-group">
+            <i class="material-icons form-icon">medication</i>
+            <input type="text" name="name" [(ngModel)]="newDrug.name" placeholder="Drug Name" required />
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="input-group">
+            <i class="material-icons form-icon">description</i>
+            <textarea name="description" [(ngModel)]="newDrug.description" placeholder="Description"></textarea>
+          </div>
+        </div>
+  
+        <div class="form-grid">
+          <div class="input-group">
+            <i class="material-icons form-icon">monetization_on</i>
+            <input type="number" name="price" [(ngModel)]="newDrug.price" placeholder="Price (₹)" required />
+          </div>
+  
+          <div class="input-group">
+            <i class="material-icons form-icon">inventory_2</i>
+            <input type="number" name="stock" [(ngModel)]="newDrug.stock" placeholder="Stock" required />
+          </div>
+        </div>
+  
+        <div class="form-grid">
+          <div class="input-group">
+            <i class="material-icons form-icon">event</i>
+            <input type="date" name="drugexpiry" [(ngModel)]="newDrug.drugExpiry" placeholder="Expiry Date" required />
+          </div>
+  
+          <div class="input-group">
+            <i class="material-icons form-icon">category</i>
+            <select name="category" [(ngModel)]="newDrug.categoryId" required>
+              <option [ngValue]="null" disabled selected>Select Category</option>
+              <option *ngFor="let category of categories" [ngValue]="category.categoryId">
+                {{ category.categoryName }}
+              </option>
+            </select>
+          </div>
+          
+        
+        </div>
+  
+        <div class="form-actions">
+          <button type="button" (click)="cancelForm()" class="cancel-btn">
+            <i class="material-icons">cancel</i> Cancel
+          </button>
+          <button type="submit" [disabled]="drugForm.invalid" class="submit-btn">
+            <i class="material-icons">{{ editMode ? 'update' : 'save' }}</i>
+            {{ editMode ? 'Update' : 'Save' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Search Bar -->
+    <div class="search-container">
+      <div class="search-input">
+        <i class="material-icons search-icon">search</i>
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          (input)="applyFrontendFilter()" 
+          placeholder="Search medications..." 
+        />
+      </div>
+      <span class="results-count">{{totalCount}} items found</span>
+    </div>
+  
+    <!-- Empty State -->
+    <div *ngIf="drugs.length === 0" class="no-drugs">
+      <i class="material-icons">inventory</i>
+      <p>No medications found.</p>
+      <button (click)="showAddForm = true" class="empty-add-btn">
+        <i class="material-icons">add_circle</i> Add Your First Medication
+      </button>
+    </div>
+  
+    <!-- Drug Table -->
+    <div class="table-wrapper" *ngIf="drugs.length > 0">
+      <table class="drug-table table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price (₹)</th>
+            <th>Stock</th>
+            <th>Expiry Date</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let drug of drugs">
+            <td>{{ drug.name }}</td>
+            <td>{{ drug.description }}</td>
+            <td>{{ drug.price | number: '1.2-2' }}</td>
+            <td [ngClass]="{'low-stock': drug.stock < 10}">{{ drug.stock }}</td>
+            <td [ngClass]="{'expiring-soon': isExpiringSoon(drug.drugExpiry)}">{{ drug.drugExpiry | date}}</td>
+            <td>{{ getCategoryName(drug.categoryId) }}</td>
+            <td class="action-buttons">
+              <button (click)="editDrug(drug)" class="edit-btn" title="Edit">
+                <i class="material-icons">edit</i>
+              </button>
+              <button (click)="deleteDrug(drug.drugId)" class="delete-btn" title="Delete">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

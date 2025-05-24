@@ -1,0 +1,108 @@
+ 
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 20px;
+    margin-bottom: 20px;
+    padding: 5px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    width: 85%;
+    margin-left: 14%;
+  }
+
+  .main-content{
+    background-color: rgba(255, 255, 255, 0.445)
+  }
+
+  .image-text{
+  
+    height:8rem;
+  }
+  .image-logo{
+    padding-left: 7px;
+    padding-top: 0px;
+    margin-top: 15px;
+    height:2.5rem;
+  }
+
+.logout-btn {
+    background: linear-gradient(90deg, #dc3545, #ff6b6b);
+    z-index:100;
+    margin-top: 5px;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 14%;
+    background-color: #2c3e50;
+    color: white;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed {
+    width: 60px;
+    overflow-x: hidden;
+  }
+  .content {
+    margin-left: 15%;
+    width: 85%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+  }
+  .app-container.sidebar-collapsed .content {
+    margin-left: 60px;
+    /* width: calc(100% - 60px); */
+  }
+  .sidebar-link{
+    padding-top: 0px;
+    display:flex;
+  }
+  
+  .logo {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    margin: 20px 0;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    display: flex;
+    gap: 7px;
+    transition: background-color 0.3s;
+    cursor:pointer;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    background-color: #34495e;
+    border-left: 4px solid #1abc9c;
+  }
+  

@@ -1,0 +1,71 @@
+<div class="home-page">
+    <div class="info-cards">
+        <div class="sales-info">
+            <img class="cart-icon" src="/cart-icon.png"  style="margin-left:25px">
+            <div class="sales-info-inside" style="margin-left: 17px; font-family:'Segoe UI'">
+                <h6 style="margin-left: 12px; font-size: 20px; font-weight: 615;">Total Sales</h6>
+                <p style="margin-left: 15px; font-size: 20px; font-weight: 550;">{{Order.length}}</p>
+            </div>
+        </div>
+        <div class="sales-info">
+            <img class="cart-icon" src="/cart-icon.png"  style="margin-left:25px">
+            <div class="sales-info-inside" style="margin-left: 20px; font-family:'Segoe UI'">
+                <h6 style="margin-left: 12px; font-size: 20px; font-weight: 615;">Total Sales</h6>
+                <p style="margin-left: 15px; font-size: 20px; font-weight: 550;">{{Order.length}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <h3>Recent Orders</h3>
+                <p routerLink="/admin-dash/purchase-suppliers" class="seeall-btn">See all ></p>
+            </div>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Order Date</th>
+                        <th>Total Amount</th>
+                        <th>TransactionId</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of FeaturedOrder">
+                        <td>{{order.orderId}}</td>
+                        <td>{{order.orderDate |date}}</td>
+                        <td>{{order.totalAmount}}</td>
+                        <td>{{order.transactionId}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Expiring List</h3>
+                <p routerLink="/admin-dash/inventory" class="seeall-btn">See all ></p>
+            </div>
+            <table class="drugs-table">
+                <thead>
+                    <tr>
+                        <th>Drug Name</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Expiry Date</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let drug of ExpiringDrugs">
+                        <td>{{drug.name}}</td>
+                        <td>{{drug.stock}}</td>
+                        <td>{{drug.price}}</td>
+                        <td>{{drug.drugExpiry | date}}</td>
+                        <td>{{drug.categoryName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

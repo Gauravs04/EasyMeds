@@ -1,0 +1,173 @@
+<!-- <div class="wrapper">
+  <div class="title-text">
+    <div class="title login" [style.marginLeft]="isLoginForm ? '0%' : '-50%'">Login</div>
+    <div class="title signup">Signup</div>
+  </div>
+  <div class="slide-controls">
+    <input type="radio" name="slide" id="login" [checked]="isLoginForm">
+    <input type="radio" name="slide" id="signup" [checked]="!isLoginForm">
+    <label for="login" class="slide login" (click)="toggleForm(true)">Login</label>
+    <label for="signup" class="slide signup" (click)="toggleForm(false)">Signup</label>
+    <div class="slider-tab" [style.left]="isLoginForm ? '0%' : '50%'"></div>
+  </div>
+
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div class="form-container">
+    <div class="form-inner" [style.transform]="isLoginForm ? 'translateX(0%)' : 'translateX(-50%)'">
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="login">
+        <div class="field">
+          <input type="email" formControlName="email" placeholder="Email Address" 
+                 [ngClass]="{ 'is-invalid': submitted && lf['email'].errors }">
+          <div *ngIf="submitted && lf['email'].errors" class="invalid-feedback">
+            <div *ngIf="lf['email'].errors['required']">Email is required</div>
+            <div *ngIf="lf['email'].errors['email']">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="password" formControlName="password" placeholder="Password"
+                 [ngClass]="{ 'is-invalid': submitted && lf['password'].errors }">
+          <div *ngIf="submitted && lf['password'].errors" class="invalid-feedback">
+            <div *ngIf="lf['password'].errors['required']">Password is required</div>
+          </div>
+        </div>
+        <div class="pass-link"><a href="#">Forgot password?</a></div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" [value]="loading ? 'Processing...' : 'Login'" [disabled]="loading">
+        </div>
+        <div class="signup-link">
+          Not a member? <a href="javascript:void(0)" (click)="toggleForm(false)">Signup now</a>
+        </div>
+      </form>
+
+     
+      <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()" class="signup">
+        <div class="field">
+          <input type="text" formControlName="name" placeholder="Name"
+                 [ngClass]="{ 'is-invalid': submitted && sf['name'].errors }">
+          <div *ngIf="submitted && sf['name'].errors" class="invalid-feedback">
+            <div *ngIf="sf['name'].errors['required']">Name is required</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="email" formControlName="email" placeholder="Email Address"
+                 [ngClass]="{ 'is-invalid': submitted && sf['email'].errors }">
+          <div *ngIf="submitted && sf['email'].errors" class="invalid-feedback">
+            <div *ngIf="sf['email'].errors['required']">Email is required</div>
+            <div *ngIf="sf['email'].errors['email']">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="password" formControlName="password" placeholder="Password"
+                 [ngClass]="{ 'is-invalid': submitted && sf['password'].errors }">
+          <div *ngIf="submitted && sf['password'].errors" class="invalid-feedback">
+            <div *ngIf="sf['password'].errors['required']">Password is required</div>
+            <div *ngIf="sf['password'].errors['minlength']">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" [value]="loading ? 'Processing...' : 'Signup'" [disabled]="loading">
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">EasyMeds</div>
+  </div>
+  <div class="slide-controls">
+    <input type="radio" name="slide" id="login" [checked]="isLoginForm">
+    <input type="radio" name="slide" id="signup" [checked]="!isLoginForm">
+    <label for="login" class="slide login" (click)="toggleForm(true)">Login</label>
+    <label for="signup" class="slide signup" (click)="toggleForm(false)">Signup</label>
+    <div class="slider-tab" [style.left]="isLoginForm ? '0%' : '50%'"></div>
+  </div>
+
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div class="form-container">
+    <div class="form-inner" [style.transform]="isLoginForm ? 'translateX(0%)' : 'translateX(-50%)'">
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="login">
+        <div class="field">
+          <input type="email" formControlName="email" placeholder="Email Address" 
+                 [ngClass]="{ 'is-invalid': submitted && lf['email'].errors }">
+          <div *ngIf="submitted && lf['email'].errors" class="invalid-feedback">
+            <div *ngIf="lf['email'].errors['required']">Email is required</div>
+            <div *ngIf="lf['email'].errors['email']">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="password" formControlName="password" placeholder="Password"
+                 [ngClass]="{ 'is-invalid': submitted && lf['password'].errors }">
+          <div *ngIf="submitted && lf['password'].errors" class="invalid-feedback">
+            <div *ngIf="lf['password'].errors['required']">Password is required</div>
+          </div>
+        </div>
+        <div class="pass-link"><a href="#">Forgot password?</a></div>
+        <div class="field btn">
+          <!-- <div class="btn-layer">Submit</div> -->
+          <input class="submit-btn" type="submit" [value]="loading ? 'Processing...' : 'Login'" [disabled]="loading">
+        </div>
+        <div class="signup-link">
+          Not a member? <a href="javascript:void(0)" (click)="toggleForm(false)">Signup now</a>
+        </div>
+      </form>
+
+      <!-- Signup Form -->
+      <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()" class="signup">
+        <div class="field">
+          <input type="text" formControlName="name" placeholder="Name"
+                 [ngClass]="{ 'is-invalid': submitted && sf['name'].errors }">
+          <div *ngIf="submitted && sf['name'].errors" class="invalid-feedback">
+            <div *ngIf="sf['name'].errors['required']">Name is required</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="email" formControlName="email" placeholder="Email Address"
+                 [ngClass]="{ 'is-invalid': submitted && sf['email'].errors }">
+          <div *ngIf="submitted && sf['email'].errors" class="invalid-feedback">
+            <div *ngIf="sf['email'].errors['required']">Email is required</div>
+            <div *ngIf="sf['email'].errors['email']">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="password" formControlName="password" placeholder="Password"
+                 [ngClass]="{ 'is-invalid': submitted && sf['password'].errors }">
+          <div *ngIf="submitted && sf['password'].errors" class="invalid-feedback">
+            <div *ngIf="sf['password'].errors['required']">Password is required</div>
+            <div *ngIf="sf['password'].errors['minlength']">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="field">
+          <input type="tel" formControlName="PhoneNumber" placeholder="Phone Number"
+                [ngClass]="{ 'is-invalid': submitted && sf['PhoneNumber'].errors }">
+          <div *ngIf="submitted && sf['PhoneNumber'].errors" class="invalid-feedback">
+            <div *ngIf="sf['PhoneNumber'].errors['required']">Phone number is required</div>
+            <div *ngIf="sf['PhoneNumber'].errors['pattern']">Invalid phone number format (numbers only, + allowed at start)</div>
+          </div>
+        </div>
+        <!-- Added Role Dropdown -->
+        <div class="field">
+          <select formControlName="role" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && sf['role'].errors }">
+            <option value="">Select Role</option>
+            <option value="Supplier">Supplier</option>
+            <option value="Doctor">Doctor</option>
+          </select>
+          <div *ngIf="submitted && sf['role'].errors" class="invalid-feedback">
+            <div *ngIf="sf['role'].errors['required']">Role is required</div>
+          </div>
+        </div>
+        
+        <div class="field btn">
+          <input  class="submit-btn" type="submit" [value]="loading ? 'Processing...' : 'Signup'" [disabled]="loading">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
