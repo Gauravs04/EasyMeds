@@ -13,7 +13,9 @@ namespace EasyMeds.API.DTOs
         public long Stock{get;set;}
         public DateTime DrugExpiry{get;set;}
         public decimal Price{get;set;}
-        public Guid CategoryId{get;set;}
+        
+        public Guid SupplierId{ get; set; }
+        public Guid CategoryId { get; set; }
 
         public string SupplierName{get;set;}
     }

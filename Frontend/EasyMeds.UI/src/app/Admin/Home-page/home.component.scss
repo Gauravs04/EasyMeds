@@ -307,6 +307,10 @@ $transition: all 0.3s ease;
   }
 }
 
+.web-logo{
+  height:7rem;
+}
+
 // Global Styles
 .pharmacy-app {
   font-family: 'Poppins', sans-serif;
@@ -318,7 +322,6 @@ $transition: all 0.3s ease;
 .main-nav {
   // background: linear-gradient(135deg, $primary-color, $secondary-color);
   background: linear-gradient(90deg, #0D3B66, #3CBBB1);
-  padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -326,8 +329,8 @@ $transition: all 0.3s ease;
   
   .nav-container {
     @include flex-between;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1300px;
+    margin-left: 80px;
     padding: 0 1.5rem;
   }
   
@@ -353,6 +356,7 @@ $transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50px;
     padding: 0.3rem;
+    margin-left: -6rem;
     width: 40%;
     
     .search-input {
@@ -386,7 +390,7 @@ $transition: all 0.3s ease;
   .nav-menu {
     @include flex-center;
     gap: 1.5rem;
-    margin-right: -4rem;
+    margin-right: -6rem;
     
     .nav-link {
       color: rgba(255, 255, 255, 0.9);
@@ -532,6 +536,7 @@ $transition: all 0.3s ease;
       margin: 0;
     }
     
+  
     .view-all {
       // color: $accent-color;
       color: #0D3B66;
@@ -556,6 +561,7 @@ $transition: all 0.3s ease;
       @include card;
       padding: 2rem 1rem;
       text-align: center;
+      cursor:pointer;
       
       .category-icon {
         background: rgba($primary-color, 0.1);

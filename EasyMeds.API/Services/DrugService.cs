@@ -49,7 +49,8 @@ namespace EasyMeds.API.Services
                     Price=d.Price,
                     DrugExpiry=d.DrugExpiry,
                     CategoryId=d.CategoryId,
-                    SupplierName=_context.Users.Where(t=>t.Id==d.SupplierId).Select(s=>s.Name).FirstOrDefault()?? "Unknown"
+                    SupplierId=d.SupplierId,
+                    SupplierName =_context.Users.Where(t=>t.Id==d.SupplierId).Select(s=>s.Name).FirstOrDefault()?? "Unknown"
                 }
             );
 

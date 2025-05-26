@@ -289,4 +289,9 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/login']); // Redirect to login page
     }
   }
+
+  getbyCategory(categoryName :string ): void{
+    this.searchQuery=categoryName
+    this.applySearch()
+  }
 }

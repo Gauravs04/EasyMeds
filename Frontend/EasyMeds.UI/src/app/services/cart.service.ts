@@ -21,7 +21,7 @@ export class CartService {
     return `cart_${UserId}`;
   }
 
-  private loadCart(UserId:string): void {
+  loadCart(UserId:string): void {
     const savedCart = localStorage.getItem(this.getusercartkey(UserId))
     if (savedCart) {
       this.cartItemsSubject.next(JSON.parse(savedCart))

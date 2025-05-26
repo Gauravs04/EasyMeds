@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.UserId=this.authService.getUserIdFromToken()!;
-    this.cartService.loadCartFromStorage(this.UserId);
+    this.cartService.loadCart(this.UserId);
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items.filter(s=>s.UserId==this.UserId)
     });

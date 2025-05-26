@@ -171,3 +171,4 @@ D:\Gaurav\Capgemini Project\EasyMeds\EasyMeds.API\obj\Debug\net9.0\refint\EasyMe
 D:\Gaurav\Capgemini Project\EasyMeds\EasyMeds.API\obj\Debug\net9.0\EasyMeds.API.pdb
 D:\Gaurav\Capgemini Project\EasyMeds\EasyMeds.API\obj\Debug\net9.0\EasyMeds.API.genruntimeconfig.cache
 D:\Gaurav\Capgemini Project\EasyMeds\EasyMeds.API\obj\Debug\net9.0\ref\EasyMeds.API.dll
+D:\Gaurav\Capgemini Project\EasyMeds\EasyMeds.API\obj\Debug\net9.0\EasyMeds.API.sourcelink.json

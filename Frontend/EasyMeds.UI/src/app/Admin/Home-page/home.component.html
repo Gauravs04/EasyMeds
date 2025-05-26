@@ -161,8 +161,9 @@
   <nav class="main-nav">
     <div class="nav-container">
       <div class="brand">
-        <span class="logo-icon"><i class="bi bi-capsule"></i></span>
-        <h1 class="brand-name">EasyMeds</h1>
+        <img class="web-logo" src="easymeds-logo-text-final.png">
+        <!-- <span class="logo-icon"><i class="bi bi-capsule"></i></span> -->
+        <!-- <h1 class="brand-name">EasyMeds</h1> -->
       </div>
       
       <div class="search-wrapper">
@@ -206,14 +207,14 @@
     </div>
   </section>
 
-  <section class="categories-section">
+  <section class="categories-section" *ngIf="!searchQuery">
     <div class="section-header">
       <h2>Med Categories</h2>
       <a href="#" class="view-all">View All</a>
     </div>
     
     <div class="category-grid">
-      <div class="category-card" *ngFor="let category of categories">
+      <div class="category-card" *ngFor="let category of categories" (click)="getbyCategory(category.categoryName)">
         <div class="category-icon">
           <!-- <i class="bi" [ngClass]="getCategoryIcon(category)"></i> -->
         </div>
@@ -226,7 +227,8 @@
   
 <section class="featured-section">
   <div class="section-header">
-    <h2>Featured Drugs</h2>
+    <h2 *ngIf="!searchQuery">Featured Drugs</h2>
+    <h2 *ngIf="searchQuery">Results</h2>
     <a routerLink="/inventory" class="view-all">View All</a>
   </div>
   
