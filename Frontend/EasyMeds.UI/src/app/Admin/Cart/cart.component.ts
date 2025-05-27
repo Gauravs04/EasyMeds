@@ -107,15 +107,20 @@ export class CartComponent implements OnInit {
     return this.cartService.getCartTotal()
   }
 
-  checkout(): void {
+  checkout(): any {
     if (this.cartItems.length === 0) {
       this.snackBar.open("Your cart is empty", "Close", {
         duration: 3000,
       })
       return
     }
-
-    this.router.navigate(["/checkout"])
+    this.UserId=this.authService.getUserIdFromToken()!;
+    this.cartService.RequestMedicine(this.cartItems,this.UserId).subscribe(
+      (response)=> console.log(response));
+    console.log(this.cartItems)
+    this.snackBar.open("Request Send For Your Medicines","Close",{
+      duration:3000,
+    })
   }
 
   continueShopping(): void {

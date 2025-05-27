@@ -8,19 +8,20 @@ import  { AuthService } from "../services/auth.service"
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const currentUser = this.authService.currentUserValue;
+    const requiredRole = route.data['role'] as string;
 
-    const currentUser = this.authService.currentUserValue
-    if (currentUser?.role=='Admin') {
-      // Authorized, so return true
-      return true
+    if (currentUser && currentUser.role === requiredRole) {
+      return true; 
     }
-    console.log("Trying to access:", state.url);
-    // Not logged in so redirect to login page with the return url
-    this.router.navigateByUrl(`/login?returnUrl=${encodeURIComponent(state.url)}`)
-    return false
+
+    console.warn("Unauthorized access to:", state.url);
+    this.authService.logout()
+    this.router.navigateByUrl(`/login?returnUrl=${encodeURIComponent(state.url)}`);
+    return false;
   }
 }

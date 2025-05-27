@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.DTOs;
 using API.Models;
 using EasyMeds.API.Data;
+using EasyMeds.API.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Services
@@ -47,43 +48,20 @@ namespace API.Services
             };
         }
 
-        public async Task<TransactionDetailsDto> CreateTransactionDetailsAsync(CreateTransactionDetailsDto createTransactionDetailsDto)
-        {
-            var transaction = new TransactionDetails
-            {
-                TransactionId = Guid.NewGuid(),
-                Status = createTransactionDetailsDto.Status,
-                Date = createTransactionDetailsDto.Date,
-                PaymentMethod = createTransactionDetailsDto.PaymentMethod,
-                amount = createTransactionDetailsDto.amount
-            };
-
-            _context.TransactionDetails.Add(transaction);
-            await _context.SaveChangesAsync();
-
-
-            return new TransactionDetailsDto
-            {
-                TransactionId = transaction.TransactionId,
-                Status = transaction.Status,
-                Date = transaction.Date,
-                PaymentMethod = transaction.PaymentMethod,
-                amount = transaction.amount
-            };
-        }
-
-        // public async Task<TransactionDetailsDto> UpdateTransactionDetailsAsync(Guid transactionId, UpdateTransactionDetailsDto updateTransactionDetailsDto)
+        // public async Task<TransactionDetailsDto> CreateTransactionDetailsAsync(CreateTransactionDetailsDto createTransactionDetailsDto)
         // {
-        //     var transaction = await _context.TransactionDetails.FindAsync(transactionId);
-        //     if (transaction == null)
-        //         return null;
+        //     var transaction = new TransactionDetails
+        //     {
+        //         TransactionId = Guid.NewGuid(),
+        //         Status = createTransactionDetailsDto.Status,
+        //         Date = createTransactionDetailsDto.Date,
+        //         PaymentMethod = createTransactionDetailsDto.PaymentMethod,
+        //         amount = createTransactionDetailsDto.amount
+        //     };
 
-        //     transaction.Status = updateTransactionDetailsDto.Status;
-        //     transaction.PaymentMethod = updateTransactionDetailsDto.PaymentMethod;
-        //     transaction.amount = updateTransactionDetailsDto.amount;
-
-        //     _context.TransactionDetails.Update(transaction);
+        //     _context.TransactionDetails.Add(transaction);
         //     await _context.SaveChangesAsync();
+
 
         //     return new TransactionDetailsDto
         //     {
@@ -94,6 +72,27 @@ namespace API.Services
         //         amount = transaction.amount
         //     };
         // }
+ 
+        public async Task<TransactionDetailsDto> UpdateTransactionDetailsAsync(TransactionVerifyDto transactionVerifyDto)
+        {
+            var transaction = await _context.TransactionDetails.FindAsync(transactionVerifyDto.TransactionId);
+            if (transaction == null)
+                return null;
+
+            transaction.Status = transactionVerifyDto.Status;
+
+            _context.TransactionDetails.Update(transaction);
+            await _context.SaveChangesAsync();
+
+            return new TransactionDetailsDto
+            {
+                TransactionId = transaction.TransactionId,
+                Status = transaction.Status,
+                Date = transaction.Date,
+                PaymentMethod = transaction.PaymentMethod,
+                amount = transaction.amount
+            };
+        }
 
         public async Task<bool> DeleteTransactionDetailsAsync(Guid transactionId)
         {

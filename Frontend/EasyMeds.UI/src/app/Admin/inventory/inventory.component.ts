@@ -230,7 +230,7 @@ export class ManageDrugsComponent implements OnInit, OnChanges {
     categoryId: null,
     SupplierId: ''
   };
-  SupplierId: string | null = '';
+  // SupplierId: string | null = '';
   num: string = '';
 
   constructor(
@@ -371,7 +371,7 @@ export class ManageDrugsComponent implements OnInit, OnChanges {
   }
 
   editDrug(drug: any): void {
-    this.SupplierId = this.apiService.someMethod();
+    // this.SupplierId = this.apiService.someMethod();
     this.newDrug = {
       drugId: drug.drugId,
       name: drug.name,
@@ -380,7 +380,7 @@ export class ManageDrugsComponent implements OnInit, OnChanges {
       stock: drug.stock,
       drugExpiry: drug.drugExpiry,
       categoryId: drug.categoryId,
-      SupplierId: this.SupplierId
+      SupplierId: drug.SupplierId
     };
     this.editMode = true;
     this.editingDrugId = drug.drugId;

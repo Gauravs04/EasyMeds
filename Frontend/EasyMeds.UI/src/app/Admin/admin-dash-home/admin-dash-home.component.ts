@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OrderService } from '../../services/order.service';
-import { CategoryDto, OrderDetails } from '../../models/user.model';
+import { CategoryDto, Order, OrderDetails } from '../../models/user.model';
 import { Drug } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { DrugService } from '../../services/drug.service';
@@ -17,8 +17,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './admin-dash-home.component.css'
 })
 export class AdminDashHomeComponent {
-  Order:OrderDetails[]=[];
-  FeaturedOrder:OrderDetails[]=[];
+  Order:Order[]=[];
+  FeaturedOrder:Order[]=[];
   Drugs:Drug[]=[];
   ExpiringDrugs:Drug[]=[]
   Categories:CategoryDto[]=[]

@@ -245,6 +245,7 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => console.error('Error fetching drugs:', err)
     });
+    
   }
 
   fetchCategories() {
@@ -256,6 +257,7 @@ export class HomeComponent implements OnInit {
 
   addToCart(drug: any): void {
     this.cartService.addToCart(drug);
+    console.log(drug)
   }
 
   getCategoryName(categoryId: string): string {

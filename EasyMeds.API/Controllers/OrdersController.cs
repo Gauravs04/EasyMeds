@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Models;
 using API.Services;
+using EasyMeds.API.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,18 +42,30 @@ namespace API.Controllers
         }
 
         // POST: api/Orders
-        [HttpPost]
-        public async Task<ActionResult> CreateOrder(CreateOrderDto createOrderDto)
+        // [HttpPost]
+        // public async Task<ActionResult> CreateOrder(CreateOrderDto createOrderDto)
+        // {
+        //     var order = await _orderService.CreateOrderAsync(createOrderDto);
+        //     return Ok();
+        // }
+
+
+        [HttpPost("checkout/{doctorId}")]
+        public async Task<IActionResult> Checkout([FromBody] List<CartItemDto> cartItems, Guid doctorId)
         {
-            var order = await _orderService.CreateOrderAsync(createOrderDto);
-            return Ok();
+            if (cartItems == null || !cartItems.Any())
+                return BadRequest("Cart is empty.");
+
+            var result = await _orderService.CheckoutAsync(cartItems, doctorId);
+
+            return Ok(new { result });
         }
 
         // PUT: api/Orders/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(Guid id, UpdateOrderDto updateOrderDto)
+        public async Task<IActionResult> UpdateOrder(Guid id, OrderStatus Status)
         {
-            var order = await _orderService.UpdateOrderAsync(id, updateOrderDto);
+            var order = await _orderService.UpdateOrderAsync(id, Status);
             if (order == null)
             {
                 return NotFound();
@@ -70,5 +84,19 @@ namespace API.Controllers
             }
             return NoContent();
         }
+
+        [HttpGet("Supplier/{id}")]
+        public async Task<ActionResult<OrderDto>> GetOrdersBySupplier(Guid id)
+        {
+            var result = await _orderService.OrderRequest(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+         
+            
+        
     }
 }

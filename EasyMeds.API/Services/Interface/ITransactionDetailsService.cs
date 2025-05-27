@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
+using EasyMeds.API.DTOs;
 
 namespace API.Services
 {
@@ -9,8 +10,8 @@ namespace API.Services
     {
         Task<IEnumerable<TransactionDetailsDto>> GetAllTransactionDetailsAsync();
         Task<TransactionDetailsDto> GetTransactionDetailsByIdAsync(Guid transactionId);
-        Task<TransactionDetailsDto> CreateTransactionDetailsAsync(CreateTransactionDetailsDto createTransactionDetailsDto);
-        // Task<TransactionDetailsDto> UpdateTransactionDetailsAsync(Guid transactionId, UpdateTransactionDetailsDto updateTransactionDetailsDto);
+        Task<TransactionDetailsDto> UpdateTransactionDetailsAsync(TransactionVerifyDto transactionVerifyDto);
+        
         Task<bool> DeleteTransactionDetailsAsync(Guid transactionId);
     }
 }

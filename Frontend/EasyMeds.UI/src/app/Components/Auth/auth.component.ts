@@ -205,7 +205,7 @@ export class AuthComponent implements OnInit {
           console.log('User role after login:', role);
           
           if (role === 'Supplier') {
-            this.router.navigate(['/supplier/dashboard']);
+            this.router.navigate(['/supplier-dash']);
           } else if (role === 'Admin') {
             this.router.navigate(['/admin-dash/home']); // default: Admin/home
           } else if(role === 'Doctor') {

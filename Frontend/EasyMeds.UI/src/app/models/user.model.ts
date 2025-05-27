@@ -47,6 +47,7 @@ export interface Drug {
   categoryId: string
   supplierName?: string
   categoryName?: string
+  supplierId:string
   imageUrl?: string // For displaying drug images
 }
 
@@ -63,10 +64,27 @@ export interface result{
   supplierId:string
 }
 
-
-
 export interface CartItem {
   UserId: string
   drug: Drug
   quantity: number
+}
+
+export interface Order {
+  orderId: string;
+  orderDate: Date;
+  status: number;
+  supplierId: string;
+  supplierName: string;
+  totalAmount: number;
+  userId: string;
+  transactionId: string;
+  orderItems: OrderItem[];
+  transactionDetails: any;
+}
+
+export interface OrderItem {
+  drugId: string;
+  quantity: number;
+  price: number;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "./api.service";
-import { OrderDetails } from "../models/user.model";
+import { Order, OrderDetails} from "../models/user.model";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -9,7 +9,15 @@ import { Observable } from "rxjs";
 export class OrderService{
 
     constructor(private apiservice: ApiService){}
-    getOrders() : Observable<OrderDetails[]> {
+    getOrders() : Observable<Order[]> {
         return this.apiservice.getOrders()
+    }
+
+    getOrdersBySupplier(UserId:string): Observable<Order[]>{
+        return this.apiservice.getOrdersBySupplier(UserId);
+    }
+
+    UpdateOrder(OrderId:string,Status:number): any{
+        return this.apiservice.updateOrder(OrderId,Status);
     }
 }

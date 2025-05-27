@@ -90,6 +90,8 @@ namespace API.Models
 
         public Guid? TransactionId { get; set; }
 
+        public Guid? SupplierId{ get; set; }
+
         // This property creates a circular reference and should be removed
         // It's being ignored in the DbContext configuration
         public Guid OrderItemId { get; set; }

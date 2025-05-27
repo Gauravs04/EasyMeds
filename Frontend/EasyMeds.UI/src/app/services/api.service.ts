@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment.prod';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { CategoryDto } from '../models/user.model';
+import { CartItem, CategoryDto, Order } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -72,7 +72,19 @@ export class ApiService {
     return this.http.get<CategoryDto[]>(`${this.apiUrl}/Category/Get-Category`);
   }
 
-  getOrders(): Observable<any> {
+  getOrders(): Observable<Order[]> {
     return this.http.get<any>(`${this.apiUrl}/Orders`);
+  }
+
+  RequestMedicine(CartItem :any, UserId:string ): Observable<string>{
+    return this.http.post<any>(`${this.apiUrl}/Orders/checkout/${UserId}`,CartItem);
+  }
+
+  getOrdersBySupplier(UserId:string): Observable<Order[]>{
+    return this.http.get<any>(`${this.apiUrl}/Orders/Supplier/${UserId}`);
+  }
+
+  updateOrder(OrderId:string,Status:number) : any{
+    return this.http.put<any>(`${this.apiUrl}/Orders/${OrderId}`,Status);
   }
 }

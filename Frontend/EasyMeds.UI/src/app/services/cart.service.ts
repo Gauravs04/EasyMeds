@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core"
-import { BehaviorSubject } from "rxjs"
+import { BehaviorSubject, Observable } from "rxjs"
 import { CartItem, Drug } from "../models/user.model"
 import { AuthService } from "./auth.service"
+import { ApiService } from "./api.service"
 
 
 @Injectable({
@@ -11,7 +12,7 @@ export class CartService {
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([])
   public cartItems$ = this.cartItemsSubject.asObservable()
 
-  constructor(private authService:AuthService) {
+  constructor(private authService:AuthService,private apiService:ApiService) {
     // Load cart from localStorage on service initialization
     const UserId=this.authService.getUserIdFromToken()!;
     this.loadCart(UserId)
@@ -95,5 +96,15 @@ export class CartService {
 
   getCartCount(): number {
     return this.cartItemsSubject.value.reduce((count, item) => count + item.quantity, 0)
+  }
+
+  RequestMedicine(CartItem:CartItem[],UserId:string): Observable<string>{
+      const cartDto = CartItem.map(item => ({
+      drugId: item.drug.drugId,
+      quantity: item.quantity,
+      supplierId: item.drug.supplierId  // ensure SupplierId exists
+    }));
+    console.log(cartDto)
+    return this.apiService.RequestMedicine(cartDto,UserId)
   }
 }

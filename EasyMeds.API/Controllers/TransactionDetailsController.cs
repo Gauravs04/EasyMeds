@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Services;
+using EasyMeds.API.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,24 +41,24 @@ namespace API.Controllers
         }
 
         // POST: api/TransactionDetails
-        [HttpPost]
-        public async Task<ActionResult<TransactionDetailsDto>> CreateTransactionDetails(CreateTransactionDetailsDto createTransactionDetailsDto)
-        {
-            var transaction = await _transactionService.CreateTransactionDetailsAsync(createTransactionDetailsDto);
-            return CreatedAtAction(nameof(GetTransactionDetails), new { id = transaction.TransactionId }, transaction);
-        }
+        // [HttpPost]
+        // public async Task<ActionResult<TransactionDetailsDto>> CreateTransactionDetails(CreateTransactionDetailsDto createTransactionDetailsDto)
+        // {
+        //     var transaction = await _transactionService.CreateTransactionDetailsAsync(createTransactionDetailsDto);
+        //     return CreatedAtAction(nameof(GetTransactionDetails), new { id = transaction.TransactionId }, transaction);
+        // }
 
         // PUT: api/TransactionDetails/5
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> UpdateTransactionDetails(Guid id, UpdateTransactionDetailsDto updateTransactionDetailsDto)
-        // {
-        //     var transaction = await _transactionService.UpdateTransactionDetailsAsync(id, updateTransactionDetailsDto);
-        //     if (transaction == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return Ok(transaction);
-        // }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTransactionDetails(TransactionVerifyDto transactionVerifyDto)
+        {
+            var transaction = await _transactionService.UpdateTransactionDetailsAsync(transactionVerifyDto);
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+            return Ok(transaction);
+        }
 
         // DELETE: api/TransactionDetails/5
         [HttpDelete("{id}")]

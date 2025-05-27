@@ -8,7 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { OnInit } from '@angular/core';
-import { OrderDetails } from '../../models/user.model';
+import { Order, OrderDetails } from '../../models/user.model';
 import { OrderService } from '../../services/order.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class PurchaseSuppliersComponent {
   //   { path: 'transactions', label: 'Transactions' }
   // ];
   displayedColumns: string[] = ['orderId', 'orderDate', 'totalAmount', 'transactionId'];
-  Orders: OrderDetails[]=[];
+  Orders: Order[]=[];
   
   constructor(
     private router: Router,
@@ -40,6 +40,7 @@ export class PurchaseSuppliersComponent {
      this.orderservice.getOrders().subscribe({
       next:(orders)=>{
         this.Orders=orders
+        console.log(this.Orders[0])
       },
       error: () => {
         console.error('Failed to load orders');

@@ -242,6 +242,7 @@
         <h3 class="product-name">{{ drug.name }}</h3>
         <div class="product-price">₹{{ drug.price | number: '1.2-2' }}</div>
         <div class="product-category">{{ getCategoryName(drug.categoryId) }}</div>
+        <div class="product-Seller">Sold by: {{drug.supplierName}}</div>
         <div class="product-description" > Use for: {{ drug.description }}</div>
       </div>
       <button class="add-to-cart-btn" (click)="addToCart(drug)">Add to Cart</button>
