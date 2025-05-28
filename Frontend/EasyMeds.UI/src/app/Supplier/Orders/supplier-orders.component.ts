@@ -34,7 +34,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './supplier-orders.component.css'
 })
 export class SupplierOrdersComponent {
-   loading: boolean = false;
+  loading: boolean = false;
+  processingOrder: string | null = null;
+  displayedColumns: string[] = ['drugName', 'quantity', 'unitPrice', 'totalPrice'];
   Orders: Order[]=[]
   UserId:string | null= ''
   constructor(private orderService:OrderService,
@@ -112,7 +114,7 @@ export class SupplierOrdersComponent {
     switch(status) {
       case 1: return 'status-pending';
       case 2: return 'status-approved';
-      case 3: return 'status-rejected';
+      case 0: return 'status-rejected';
       default: return 'status-unknown';
     }
   }
@@ -121,28 +123,29 @@ export class SupplierOrdersComponent {
     switch(status) {
       case 1: return 'Pending';
       case 2: return 'Approved';
-      case 3: return 'Rejected';
+      case 0: return 'Rejected';
       default: return 'Unknown';
     }
   }
 
-  // acceptDrug(orderId: string, drugId: string) {
-  //   this.orderService.updateDrugStatus(orderId, drugId, 'approve').subscribe({
-  //     next: () => this.updateOrderStatus(orderId, drugId, 2),
-  //     error: (err) => console.error('Approval failed:', err)
-  //   });
-  // }
-
-  // rejectDrug(orderId: string, drugId: string) {
-  //   this.orderService.updateDrugStatus(orderId, drugId, 'reject').subscribe({
-  //     next: () => this.updateOrderStatus(orderId, drugId, 3),
-  //     error: (err) => console.error('Rejection failed:', err)
-  //   });
-  // }
-
-  private updateOrderStatus(orderId: string, status: number) {
-    this.orderService.UpdateOrder(orderId,status);
+  acceptOrder(orderId: string) {
+     console.log("Accept clicked, sending status 2");
+    this.orderService.UpdateOrder(orderId,2).subscribe({
+      next: () => console.log("Order Accepted"),
+      error: () => console.error('Approval failed:')
+    });
   }
+
+  rejectOrder(orderId: string) {
+    this.orderService.UpdateOrder(orderId,0).subscribe({
+      next: () => console.log("Order Rejected"),
+      error: () => console.error('Rejection failed:')
+    });
+  }
+
+  // private updateOrderStatus(orderId: string, status: number) {
+  //   this.orderService.UpdateOrder(orderId,status);
+  // }
 
   private calculateDrugPrice(item: any): number {
     // Implement your actual price calculation logic

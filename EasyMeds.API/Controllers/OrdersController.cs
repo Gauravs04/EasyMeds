@@ -63,9 +63,9 @@ namespace API.Controllers
 
         // PUT: api/Orders/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(Guid id, OrderStatus Status)
+        public async Task<IActionResult> UpdateOrder(Guid id, UpdateOrderDto updateOrderDto)
         {
-            var order = await _orderService.UpdateOrderAsync(id, Status);
+            var order = await _orderService.UpdateOrderAsync(id, updateOrderDto.Status);
             if (order == null)
             {
                 return NotFound();

@@ -14,15 +14,17 @@ namespace API.DTOs
         public Guid? SupplierId { get; set; }
         public string SupplierName { get; set; }
         public ICollection<OrderItemDto> OrderItems { get; set; }
-        public TransactionDetailsDto TransactionDetails{ get; set; }
+        public TransactionDetailsDto TransactionDetails { get; set; }
     }
-    
+
 
     public class OrderItemDto
     {
         public Guid DrugId { get; set; }
-        public string DrugName{ get; set; }
+        public string DrugName { get; set; }
         public Guid OrderId { get; set; }
+
+        public decimal Price { get; set; }
         public long Quantity { get; set; }
     }
 
@@ -34,6 +36,11 @@ namespace API.DTOs
         public decimal TotalAmount { get; set; }
         public string PaymentMethod { get; set; }
         public decimal TransactionAmount { get; set; }
+    }
+
+    public class UpdateOrderDto
+    { 
+        public OrderStatus Status{ get; set; }
     }
 
 }

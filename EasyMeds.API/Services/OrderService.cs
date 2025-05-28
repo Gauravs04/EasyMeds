@@ -242,8 +242,9 @@ namespace API.Services
                 {
                     OrderId = s.OrderId,
                     DrugId = s.DrugId,
-                    DrugName=s.Drugs.Name,
-                    Quantity =s.Quantity
+                    DrugName = s.Drugs.Name,
+                    Quantity = s.Quantity,
+                    Price=s.Drugs.Price
                 }).ToList(),
                 TransactionDetails = s.TransactionDetails == null ? null : new TransactionDetailsDto
                 {

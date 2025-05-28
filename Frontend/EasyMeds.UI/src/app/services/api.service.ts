@@ -85,6 +85,6 @@ export class ApiService {
   }
 
   updateOrder(OrderId:string,Status:number) : any{
-    return this.http.put<any>(`${this.apiUrl}/Orders/${OrderId}`,Status);
+    return this.http.put<any>(`${this.apiUrl}/Orders/${OrderId}`,{Status});
   }
 }
