@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EasyMeds.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8864636e0709abe3c91621c9beb3ddaa2fa05e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb5a7eef96b29e6073961c65d7be95c89b3e654f")]
 [assembly: System.Reflection.AssemblyProductAttribute("EasyMeds.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EasyMeds.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -49,6 +49,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ITransactionDetailsService, TransactionDetailsService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
+builder.Services.AddScoped<IUserService, UserService>();
 // builder.Services.AddScoped<ICartService,CartService>();
 
 

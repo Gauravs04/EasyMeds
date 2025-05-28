@@ -10,6 +10,7 @@ import { AdminDashHomeComponent } from './Admin/admin-dash-home/admin-dash-home.
 import { SupplierHomeComponent } from './Supplier/home/supplier-home.component';
 import { SupplierOrdersComponent } from './Supplier/Orders/supplier-orders.component';
 import { SupplierInventoryComponent } from './Supplier/Inventory/supplier-inventory/supplier-inventory.component';
+import { UsersComponent } from './Admin/User/users.component';
 
 
 
@@ -20,7 +21,8 @@ export const routes: Routes = [
   { path: "admin-dash", component: AdminDashComponent, canActivate: [AuthGuard],data:{role:"Admin"}, children: [
     { path: "home", component: AdminDashHomeComponent },
     { path: "inventory", component: ManageDrugsComponent },
-    { path: "purchase-suppliers", component: PurchaseSuppliersComponent }
+    { path: "purchase-suppliers", component: PurchaseSuppliersComponent },
+    {path: "users", component: UsersComponent }
   ] },
   { path:'supplier-dash', component: SupplierHomeComponent, canActivate:[AuthGuard],data:{role:"Supplier"}, children:[
     {path:"orders",component: SupplierOrdersComponent},

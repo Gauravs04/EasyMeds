@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment.prod';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { CartItem, CategoryDto, Order } from '../models/user.model';
+import { CartItem, CategoryDto, Order, Users } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -86,5 +86,22 @@ export class ApiService {
 
   updateOrder(OrderId:string,Status:number) : any{
     return this.http.put<any>(`${this.apiUrl}/Orders/${OrderId}`,{Status});
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/User/ViewAll`);
+    
+  }
+
+  updateUsers(user: Users): Observable<any> {
+    return this.http.put(`${this.apiUrl}/User/Edit-User/${user.userId}`, user);
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/User/Delete-User/${userId}`);
+  }
+
+  addUser(user: Users): Observable<any> {
+    return this.http.post(`${this.apiUrl}/User/Create-User`, user);
   }
 }

@@ -85,6 +85,14 @@ export interface Order {
 
 export interface OrderItem {
   drugId: string;
+  drugName?:string;
   quantity: number;
   price: number;
+}
+export interface Users {
+  userId?: string ;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  role: string; // e.g., Admin, Doctor, Supplier
 }

@@ -118,9 +118,11 @@ export class CartComponent implements OnInit {
     this.cartService.RequestMedicine(this.cartItems,this.UserId).subscribe(
       (response)=> console.log(response));
     console.log(this.cartItems)
-    this.snackBar.open("Request Send For Your Medicines","Close",{
+    this.clearCart();
+    this.snackBar.open("Request Sent For Your Medicines","Close",{
       duration:3000,
     })
+    
   }
 
   continueShopping(): void {

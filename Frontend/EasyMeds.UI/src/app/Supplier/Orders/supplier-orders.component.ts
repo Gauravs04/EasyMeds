@@ -1,4 +1,4 @@
-import { Component, Pipe } from '@angular/core';
+import { Component, Pipe, SimpleChange, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/user.model';
@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DrugService } from '../../services/drug.service';
 import { MatCardModule } from '@angular/material/card';
 import { pipe } from 'rxjs';
+import { orderBy } from 'lodash';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -46,6 +47,7 @@ export class SupplierOrdersComponent {
   ngOnInit(){
     this.GetOrders()
   }
+
 
   // GetOrders(): void{
   //   this.orderService.getOrders().subscribe({
@@ -91,16 +93,17 @@ export class SupplierOrdersComponent {
       // 1. Handle object response structure
       if (response && response) {
         // 2. Convert object to array and filter
-        this.Orders = response
-          .filter((order: any) => 
-            order.supplierId === UserId && 
-            order.orderItems // Remove orders without items
-          )
-          // 3. Ensure orderItems is always an array
-          .map((order: any) => ({
-            ...order,
-            orderItems: order.orderItems || []
-          }));
+        this.Orders = orderBy(
+            response.filter((order: any) =>
+              order.supplierId === UserId &&
+              order.orderItems
+            ).map((order: any) => ({
+              ...order,
+              orderItems: order.orderItems || []
+            })),
+            ['orderDate'],
+            ['asc']
+          );
       } else {
         this.Orders = [];
       }
@@ -131,14 +134,19 @@ export class SupplierOrdersComponent {
   acceptOrder(orderId: string) {
      console.log("Accept clicked, sending status 2");
     this.orderService.UpdateOrder(orderId,2).subscribe({
-      next: () => console.log("Order Accepted"),
+      next: () =>{ console.log("Order Accepted"),
+         this.GetOrders()
+      },
       error: () => console.error('Approval failed:')
     });
+   
   }
 
   rejectOrder(orderId: string) {
     this.orderService.UpdateOrder(orderId,0).subscribe({
-      next: () => console.log("Order Rejected"),
+      next: () => {console.log("Order Rejected"),
+        this.GetOrders()
+      },
       error: () => console.error('Rejection failed:')
     });
   }

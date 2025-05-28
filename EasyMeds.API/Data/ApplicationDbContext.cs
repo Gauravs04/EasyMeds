@@ -106,6 +106,26 @@ namespace EasyMeds.API.Data
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Inventory>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Inventories)
+                .HasForeignKey(o => o.SupplierId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Drugs>()
+                .HasMany(d => d.Inventory)
+                .WithOne(i => i.Drugs)
+                .HasForeignKey(i => i.DrugId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Inventory>()
+            .HasOne(i => i.Drugs)
+            .WithMany(d => d.Inventory)
+            .HasForeignKey(i => i.DrugId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
             // Fix the circular reference between Orders and OrderItems
             // Remove the OrderItemId from Orders as it creates a circular reference
             modelBuilder.Entity<Orders>()
@@ -125,6 +145,14 @@ namespace EasyMeds.API.Data
                 .HasForeignKey(o => o.SupplierId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            
+            modelBuilder.Entity<Drugs>()
+            .HasOne(d => d.Category)
+            .WithMany(c => c.Drugs)
+            .HasForeignKey(d => d.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade); // or Restrict, SetNull, etc.
+
 
             // Ensure table names are singular
             modelBuilder.Entity<Category>().ToTable("Category");
